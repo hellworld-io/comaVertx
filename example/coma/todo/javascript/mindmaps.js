@@ -21,5 +21,5 @@ eventBus.registerHandler("mindMaps.save", function(mindMap,responder){
 
 eventBus.registerHandler("mindMaps.delete",function(args,responder){
   delete mindMaps[args.id];
-  responder();
+  responder({});
 });
