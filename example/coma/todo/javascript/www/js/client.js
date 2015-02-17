@@ -7,25 +7,30 @@ eb.onopen = function(){
   		eb.send("mindMaps.delete", {id: mindMap._id}, function(){
   			li.remove();
   		});
-  		
+
   		return false;
   	};
-  	
+
   	$("<span>").text(mindMap.name).appendTo(li);
   	$("<button>").text("Delete").on("click",deleteMindMap).appendTo(li);
   	li.appendTo(".mind-maps");
   };
-  
+
   $(".create-form").submit(function(){
   	var nameInput = $("[name=name]",this);
-  	eb.send("mindMaps.save", {name : nameInput.val()}, function(result){
-  		renderListItem(result);
-  		nameInput.val();
-  	});
+    if(nameInput.val() != null && nameInput.val() != ""){
+        eb.send("mindMaps.save", {name : nameInput.val()}, function(result){
+            renderListItem(result);
+            nameInput.val();
+        });
+    }else{
+        alert("MindMap text is Null!!!");
+    }
+
   	return false;
   });
-  
-  
+
+
   eb.send("mindMaps.list", {}, function(res){
   	$.each(res.mindMaps, function(){
   		renderListItem(this);
