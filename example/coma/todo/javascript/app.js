@@ -1,5 +1,6 @@
 var container = require("vertx/container");
 
+// config setting
 var config = {
   "web_root" : "./www"
   , "port" : 8888
